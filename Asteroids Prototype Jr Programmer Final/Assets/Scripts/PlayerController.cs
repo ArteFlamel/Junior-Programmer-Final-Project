@@ -8,19 +8,26 @@ public class PlayerController : MonoBehaviour
 
     private EnemyBehavior m_Selected = null;
 
-    public void HandleSelection()
+    public void Update()
     {
+        ClickedPolluter();
+    }
+
+    public void ClickedPolluter()
+    {
+        
         var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            //the collider could be children of the unit, so we make sure to check in the parent
+            Debug.Log("Selected something");
             var enemy = hit.collider.GetComponentInParent<EnemyBehavior>();
             m_Selected = enemy;
             
             if (m_Selected != null)
             {
                 m_Selected.BreakApart();
+                
             }
 
 
